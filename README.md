@@ -1,5 +1,5 @@
 # dcx (work in progress)
-===========
+===
 
 **Example:**
 ```
