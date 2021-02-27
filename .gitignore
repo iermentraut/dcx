@@ -5,8 +5,6 @@
 /build/*
 !/build/.gitkeep
 !/build/yaml-merge
-/compose.d/*/*.yaml
-/compose.d/*/*.yml
-/env.d/*/*.env
-/conf.d/*
-!/conf.d/.gitkeep
+/compose/*/*.yaml
+/compose/*/*.yml
+/env/*/*.env
