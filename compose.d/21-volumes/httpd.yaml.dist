@@ -1,0 +1,8 @@
+---
+volumes:
+  httpd:
+    driver: local
+    driver_opts:
+      type: none
+      o: bind
+      device: $PWD/htdocs

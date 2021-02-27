@@ -1,0 +1,44 @@
+#!/bin/bash
+
+CWD=$(cd "$(dirname "$BASH_SOURCE")"; cd -P "$(dirname "$(readlink "$BASH_SOURCE" || echo "$BASH_SOURCE")")" &> /dev/null; pwd)
+
+subcommand=$1; shift
+case "$subcommand" in
+  update)
+        if [ -f ${CWD}/../.env ]; then
+            rm -rf ${CWD}/../.env
+        fi
+
+        printf "dcx# creating .env file...\n"
+        while IFS= read -r FILE; do
+            export $(echo $(cat $FILE | sed 's/#.*//g'| xargs) | envsubst) &> /dev/null
+            printf "# ${FILE} >>>\n" >> .env
+            cat $FILE | envsubst >> .env
+            printf "# <<< ${FILE}\n\n" >> .env
+        done <<< "$(find ./env.d -mindepth 1 -type f -not -name "*.dist" | sort)"
+        printf "dcx# ...done\n"
+
+        printf "dcx# build yaml-merge image...\n"
+        docker build \
+            -q \
+            -t yaml-merge \
+            -f ${CWD}/../build/yaml-merge/Dockerfile \
+            ${CWD}/../build/yaml-merge
+        printf "dcx# ...done\n"
+
+        printf "dcx# creating docker-compose.yml file...\n"
+        docker run --rm \
+            -v ${CWD}/compose.d:/yaml/compose.d \
+            yaml-merge > ${CWD}/../docker-compose.yml
+        printf "dcx# ...done\n"
+
+    shift $((OPTIND -1))
+    ;;
+
+  *)
+      echo "Usage:"
+      echo "    ./bin/dcx uptdate            Creates or update .env and docker-compose.yml"
+      exit 0
+    exit 1
+    ;;
+esac

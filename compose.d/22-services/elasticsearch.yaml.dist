@@ -1,0 +1,12 @@
+---
+services:
+  elasticsearch:
+    image: "docker.elastic.co/elasticsearch/elasticsearch-oss:6.5.4"
+    profiles: ["akeneo"]
+    environment:
+      ES_JAVA_OPTS: "${ES_JAVA_OPTS:--Xms512m -Xmx512m}"
+      discovery.type: "single-node"
+    networks:
+      akeneo: {}
+    labels:
+      traefik.enable: "false"
