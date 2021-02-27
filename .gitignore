@@ -7,8 +7,6 @@
 !/build/yaml-merge
 /compose.d/*/*.yaml
 /compose.d/*/*.yml
-!/compose.d/*/*.dist
-/env.d/*
-!/env.d/*/.gitkeep
-!/env.d/*/*.dist
+/env.d/*/*.env
 /conf.d/*
+!/conf.d/.gitkeep
