@@ -22,6 +22,6 @@ docker build \
     ${CWD}/build/yaml-merge
 
 docker run --rm \
-    -v ${CWD}/compose.d:/yaml/compose.d \
+    -v ${CWD}/compose:/yaml/compose.d \
     yaml-merge > ${CWD}/docker-compose.yml
 printf "dcx# ...done\n"
