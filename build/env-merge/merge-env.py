@@ -1,7 +1,6 @@
 #!/usr/bin/env python
 import glob
 from dotenv import dotenv_values
-#  from pprint import pprint
 
 temp_file = open("/home/docker/.env", "wb")
 
