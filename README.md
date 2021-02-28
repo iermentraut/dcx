@@ -89,6 +89,16 @@ services:
 
 ## Usage
 Create or update `.env` and `docker-compose.yml` by executing:
-```
+
+```bash
 ./dcx
+```
+
+## Initial setup
+
+```bash
+git clone git@github.com:iermentraut/dcx.git ~/dcx
+cd ~/dcx
+rm -rf .git .gitignore
+git init
 ```
