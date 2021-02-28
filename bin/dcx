@@ -5,18 +5,26 @@ CWD=$(cd "$(dirname "$BASH_SOURCE")"; cd -P "$(dirname "$(readlink "$BASH_SOURCE
 subcommand=$1; shift
 case "$subcommand" in
   update)
-        if [ -f ${CWD}/../.env ]; then
-            rm -rf ${CWD}/../.env
-        fi
+        # if [ -f ${CWD}/../.env ]; then
+        #     rm -rf ${CWD}/../.env
+        # fi
 
         printf "dcx# creating .env file...\n"
-        while IFS= read -r FILE; do
-            export $(echo $(cat $FILE | sed 's/#.*//g'| xargs) | envsubst) &> /dev/null
-            printf "# ${FILE} >>>\n" >> .env
-            cat $FILE | envsubst >> .env
-            printf "# <<< ${FILE}\n\n" >> .env
-        done <<< "$(find ./env.d -mindepth 1 -type f -not -name "*.dist" | sort)"
+        docker build \
+          -q \
+          -t env-merge \
+          -f ${CWD}/../build/env-merge/Dockerfile \
+          ${CWD}/../build/env-merge
+
+        docker run --rm -v ${CWD}/../:/app env-merge
         printf "dcx# ...done\n"
+
+        # while IFS= read -r FILE; do
+        #     export $(echo $(cat $FILE | sed 's/#.*//g'| xargs) | envsubst) &> /dev/null
+        #     printf "# ${FILE} >>>\n" >> .env
+        #     cat $FILE | envsubst >> .env
+        #     printf "# <<< ${FILE}\n\n" >> .env
+        # done <<< "$(find ./env.d -mindepth 1 -type f -not -name "*.dist" | sort)"
 
         printf "dcx# build yaml-merge image...\n"
         docker build \
