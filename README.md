@@ -2,9 +2,9 @@
 
 Docker-Compose allows you to work with specific `profiles` but in some specific cases it can be a pain in the a**. That's why `dcx` has a different approach to manage multiple `docker-compose.yml` and `.env` files. With `dcx` you will be able to organise your files in modularised components. At the end all you modularised components will be merged into one single `docker-compose.yml` and `.env`.
 
-### Examples
+## Examples
 
-#### .env
+### .env
 
 `env/20-services/test.env`:
 
@@ -28,7 +28,7 @@ GREETING="World"
 COMPOSE_UID="1000"
 ```
 
-#### docker-compose.yml
+### docker-compose.yml
 
 `compose/21-volumes/httpd.yaml`:
 
