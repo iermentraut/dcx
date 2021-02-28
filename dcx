@@ -6,20 +6,20 @@ printf "dcx# creating .env file...\n"
 docker build \
   -q \
   -t env-merge \
-  -f ${CWD}/../build/env-merge/Dockerfile \
-  ${CWD}/../build/env-merge
+  -f ${CWD}/build/env-merge/Dockerfile \
+  ${CWD}/build/env-merge
 
-docker run --rm -v ${CWD}/../:/app env-merge
+docker run --rm -v ${CWD}/:/app env-merge
 printf "dcx# ...done\n"
 
 printf "dcx# creating docker-compose.yml file...\n"
 docker build \
     -q \
     -t yaml-merge \
-    -f ${CWD}/../build/yaml-merge/Dockerfile \
-    ${CWD}/../build/yaml-merge
+    -f ${CWD}/build/yaml-merge/Dockerfile \
+    ${CWD}/build/yaml-merge
 
 docker run --rm \
     -v ${CWD}/compose.d:/yaml/compose.d \
-    yaml-merge > ${CWD}/../docker-compose.yml
+    yaml-merge > ${CWD}/docker-compose.yml
 printf "dcx# ...done\n"
