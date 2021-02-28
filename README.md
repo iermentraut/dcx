@@ -10,7 +10,7 @@ That's why `dcx` has a different approach to manage multiple `docker-compose.yml
 
 `env/20-services/test.env`:
 
-```
+```env
 HELLO="World"
 GREETING="Mars"
 COMPOSE_UID="${COMPOSE_UID:-1000}
@@ -18,13 +18,13 @@ COMPOSE_UID="${COMPOSE_UID:-1000}
 
 `env/99-overrides/test.env`:
 
-```
+```env
 GREETING="${HELLO}"
 ```
 
 **Result**
 
-```
+```env
 HELLO="World"
 GREETING="World"
 COMPOSE_UID="1000"
