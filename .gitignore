@@ -9,3 +9,5 @@
 /compose/*/*.yaml
 /compose/*/*.yml
 /env/*/*.env
+conf/*
+!conf/.gitkeep
