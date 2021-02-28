@@ -1,6 +1,8 @@
 # dcx (work in progress)
 
-Docker-Compose allows you to work with specific `profiles` but in some specific cases it can be a pain in the a**. That's why `dcx` has a different approach to manage multiple `docker-compose.yml` and `.env` files. With `dcx` you will be able to organise your files in modularised components. At the end all you modularised components will be merged into one single `docker-compose.yml` and `.env`.
+Docker-Compose allows you to include different docker-compose files by running `docker-compose -f docker-compose.yml -f docker-compose.custom.yml`, define [COMPOSE_FILE](https://docs.docker.com/compose/reference/envvars/#compose_file) in your `.env` file or even work with specific [Profiles](https://docs.docker.com/compose/profiles/) but in some cases it can be a pain in the a**. 
+
+That's why `dcx` has a different approach to manage multiple `docker-compose.yml` and `.env` files. With `dcx` you will be able to organise your files in modularised components. All your modularised components will be merged into one single `docker-compose.yml` and `.env` at the end.
 
 ## Examples
 
